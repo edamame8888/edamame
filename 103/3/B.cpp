@@ -1,0 +1,36 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <cmath>
+#include <string>
+using namespace std;
+
+int N;
+long  a[100000];
+
+long long gcd(long long  a, long long  b) {
+  if(b == 0) return a;
+  return gcd(b, a % b);
+}
+long long lcm(long long a, long long b){
+  return a*b / gcd(a,b);
+}
+
+void solve(){
+
+  long long ans = 0;
+  for(int i = 0; i <N; i++){
+    ans += a[i]-1;
+  }
+  cout << ans << endl;
+  return ;
+}
+int main(){
+  cin >> N;
+  for(int i = 0; i < N; i++){
+    cin >> a[i];
+  }
+
+  solve();
+  return 0;
+}
