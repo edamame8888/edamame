@@ -1,0 +1,27 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+string n;
+int k;
+bool num[10];
+
+void solve(){
+  
+
+  return ;
+}
+
+int main(){
+  int x;
+  cin >> n >> k;
+  for(int i = 0; i < 10; i++) num[i] = true;
+  for(int i = 0; i < k; i++){
+    cin >> x;
+    true[x] = false;
+  }
+  solve();
+  return 0;
+}

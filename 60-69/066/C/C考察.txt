@@ -1,0 +1,13 @@
+
+  a1 a2                 // even
+  a2 a1 a3              // odd
+  a3 a1 a2 a4           // even
+  a4 a2 a1 a3 a5        // odd
+
+  // n = odd number
+  odd  number is inputed push back queue.
+  even number is inputed push front queue.
+
+  // n = even number
+  odd  number is inputed for push front queue.
+  even number is inputed for push back queue.
