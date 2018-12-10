@@ -1,39 +1,24 @@
-#include <vector>
-#include <list>
-#include <map>
-#include <set>
-#include <deque>
-#include <stack>
-#include <bitset>
-#include <algorithm>
-#include <functional>
-#include <numeric>
-#include <utility>
-#include <sstream>
-#include <iostream>
-#include <iomanip>
-#include <cstdio>
-#include <cmath>
-#include <cstdlib>
-#include <cctype>
-#include <string>
-#include <cstring>
-#include <ctime>
-
+#include <bits/stdc++.h>
 using namespace std;
-inline int toInt(string s) {int v; istringstream sin(s);sin>>v;return v;}
+#define FOR(i,a,b) for(int i=(a);i<(b);++i)
+#define rep(i, n) for(int i = 0; i < (int)(n); i++)
+#define all(x) (x).begin(),(x).end()
+typedef long long ll;
+
 
 int main(){
-  int N;
-  cin >> N;
-  for(int i = 0;i < 100; i++){
-    for(int j = 0;j < 100; j++){
-      if( N == (i*4 + j*7) ){
-        cout << "Yes" << endl;
-        return 0;
-      }else if(N < i*4+j*7) break;
-    }
+  int n;
+  cin >> n;
+  vector<int> p(n);
+  rep(i,n){
+    cin >> p[i];
   }
-  cout << "No" << endl;
+  sort(all(p),greater<int>());
+  int ans = 0;
+  rep(i,n){
+    if(i == 0) ans += p[i]/2;
+    else ans += p[i];
+  }
+  cout << ans << endl;
   return 0;
 }

@@ -1,44 +1,49 @@
-#include <vector>
-#include <list>
-#include <map>
-#include <set>
-#include <deque>
-#include <stack>
-#include <bitset>
-#include <algorithm>
-#include <functional>
-#include <numeric>
-#include <utility>
-#include <sstream>
-#include <iostream>
-#include <iomanip>
-#include <cstdio>
-#include <cmath>
-#include <cstdlib>
-#include <cctype>
-#include <string>
-#include <cstring>
-#include <ctime>
-
+#include <bits/stdc++.h>
 using namespace std;
-
+#define FOR(i,a,b) for(int i=(a);i<(b);++i)
+#define rep(i, n) for(int i = 0; i < (int)(n); i++)
+#define all(x) (x).begin(),(x).end()
 inline int toInt(string s) {int v; istringstream sin(s);sin>>v;return v;}
+typedef long long ll;
+
+ll lv[51];//レベルnの枚数を格納
+ll cntL(ll level){
+  if(level == 0){
+    lv[0] = 1;
+    return 1;
+  }
+  if(lv[level] != 0) return lv[level] ;
+  lv[level] = 3 + 2*cntL(level - 1);
+  return lv[level];
+}
+
+ll pati(ll level,ll index){
+  //cout << "cntL ," << level << ", "<< cntL(level) << endl;
+  if(level == 0 && index == 0){
+    return 1;
+  }
+  if(index == 0) return 0;//ban
+  else if(index <= cntL(level-1)){
+    //cout << "level =" << level << " index = "<< index << " pat " << 0 << endl;
+    return pati(level-1,index-1);
+  }else if(index == cntL(level-1) + 1){
+    //cout << "level =" << level << " index = "<< index << " pat " << 1 << endl;
+    return pati(level-1,cntL(level-1)-1) + 1;
+  }else if(index < cntL(level) - 1){
+    //cout << "level =" << level << " index = "<< index << " pat " << 2 << endl;
+    return pati(level-1,cntL(level-1)-1) + 1 + pati(level - 1, index - cntL(level-1) - 2);
+  }else if(index == cntL(level) - 1){
+    //cout << "level =" << level << " index = "<< index << " pat " << 3 << endl;
+    return 1+ 2*pati(level-1,cntL(level-1)-1);
+  }
+  cout << "error"<< endl;
+  return 0;
+}
 
 int main(){
-  long ans = 0;
-  int N,M;
-  cin >> N >> M;
-  vector<int> A(N);
-  vector<int> S(N+1);
-  map<int, int> mod_map;
-  mod_map[0] = 1;
-  S[0] = 0;
-  for(int i = 0; i < N; i++){
-    cin >> A[i];
-    S[i+1] = (A[i] + S[i]) % M;
-    ans += mod_map[S[i+1]];
-    mod_map[S[i+1]]++;
-  }
+  ll n,x;
+  cin >> n >> x;
+  ll ans = pati(n,x-1);
   cout << ans << endl;
   return 0;
 }

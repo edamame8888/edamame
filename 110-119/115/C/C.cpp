@@ -1,47 +1,26 @@
-#include <vector>
-#include <list>
-#include <map>
-#include <set>
-#include <deque>
-#include <stack>
-#include <bitset>
-#include <algorithm>
-#include <functional>
-#include <numeric>
-#include <utility>
-#include <sstream>
-#include <iostream>
-#include <iomanip>
-#include <cstdio>
-#include <cmath>
-#include <cstdlib>
-#include <cctype>
-#include <string>
-#include <cstring>
-#include <ctime>
-
+#include <bits/stdc++.h>
 using namespace std;
+#define FOR(i,a,b) for(int i=(a);i<(b);++i)
+#define rep(i, n) for(int i = 0; i < (int)(n); i++)
+#define all(x) (x).begin(),(x).end()
 inline int toInt(string s) {int v; istringstream sin(s);sin>>v;return v;}
+typedef long long ll;
+
 
 int main(){
-  int N;
-  cin >> N;
-  string s = "";
-  if(N == 0){
-    cout << 0 << endl;
-    return 0;
+  int n,k;
+  cin >> n >> k;
+  vector<int> h(n);
+  rep(i,n){
+    cin >> h[i];
   }
-  while(N != 0){
-    if( N % (-2) == 0) s = s + "0";
-    else if(N % (-2) == 1) s = s + "1";
-    else{
-      N = N - 2;
-      s = s + "1";
+  sort(all(h));
+  int ans = 1e9;
+  rep(i,n){
+    if(i+k-1 < n){
+      ans = min(ans,abs(h[i]-h[i+k-1]));
     }
-
-    N /= (-2);
   }
-  reverse(s.begin(), s.end());
-  cout << s << endl;
+  cout << ans << endl;
   return 0;
 }
