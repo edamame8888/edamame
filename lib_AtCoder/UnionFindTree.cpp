@@ -34,3 +34,15 @@ struct UnionFind {
         return true;
     }
 };
+
+/*ex
+UnionFind uf(N);
+    double hosyu = 0;
+    for (auto e : edges) {
+        int u = e.second.first, v = e.second.second;
+        if (uf.issame(u, v)) continue;
+        hosyu += e.first;
+        uf.merge(u, v);
+    }
+    cout << fixed << setprecision(10) << all - hosyu << endl;
+*/
