@@ -1,0 +1,7 @@
+/Users/imaedakouki/Projects/C++/AtCoder/ABC/40-49/047/D/D.cpp: In function 'int main()':
+/Users/imaedakouki/Projects/C++/AtCoder/ABC/40-49/047/D/D.cpp:34:14: error: redeclaration of 'VLL minNum'
+   VLL minNum(N,0);
+              ^
+/Users/imaedakouki/Projects/C++/AtCoder/ABC/40-49/047/D/D.cpp:33:7: note: 'VLL minNum' previously declared here
+   VLL minNum(N,0);
+       ^~~~~~
