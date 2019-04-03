@@ -24,11 +24,14 @@ using namespace std;
 inline int toInt(string s) {int v; istringstream sin(s);sin>>v;return v;}
 
 int main(){
-  int a,b;
-  cin >> a >> b;
-  for(int i = 1; i < 4; i++){
-    if(a*b*i % 2 == 1){cout << "Yes" << endl; return 0;}
-  }
-  cout << "No" << endl; 
+  string s;
+  cin >> s;
+
+  int m = toInt(s.substr(5,2));
+
+
+  if((m > 4)){
+    cout << "TBD" << endl;
+  }else cout << "Heisei" << endl;
   return 0;
 }

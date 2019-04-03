@@ -1,44 +1,37 @@
-#include <vector>
-#include <list>
-#include <map>
-#include <set>
-#include <deque>
-#include <stack>
-#include <bitset>
-#include <algorithm>
-#include <functional>
-#include <numeric>
-#include <utility>
-#include <sstream>
-#include <iostream>
-#include <iomanip>
-#include <cstdio>
-#include <cmath>
-#include <cstdlib>
-#include <cctype>
-#include <string>
-#include <cstring>
-#include <ctime>
-
+#include <bits/stdc++.h>
 using namespace std;
+
+//repetition
+#define FOR(i,a,b) for(int i=(a);i<(b);++i)
+#define rep(i, n) for(int i = 0; i < (int)(n); i++)
+
+//container util
+#define all(x) (x).begin(),(x).end()
+
+//typedef
+typedef long long ll;
+typedef vector<int> VI;
+typedef vector<VI> VVI;
+typedef vector<ll> VLL;
+typedef vector<VLL> VVLL;
+typedef vector<string> VS;
+typedef pair<int, int> PII;
+typedef pair<ll, ll> PLL;
+
+
+//conversion
 inline int toInt(string s) {int v; istringstream sin(s);sin>>v;return v;}
+template<class T> inline string toString(T x) {ostringstream sout;sout<<x;return sout.str();}
 
+int n,h,ans,p;
 int main(){
-  string s;
-  long long k;
-  cin >> s >> k;
-
-  for(int i = 0; i < s.size(); i++){
-    if(s[i] != '1'){
-      cout << s[i] << endl;
-      return 0;
-    }else if(k - 1 == 0){
-      cout << 1 << endl;
-      return 0;
-    }else{
-      k --;
-    }
+  cin >> n;
+  rep(i,n){
+    cin >> h;
+    if(p < h) ans += h-p;
+    p = h;
   }
 
+  cout << ans << endl;
   return 0;
 }

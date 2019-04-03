@@ -1,68 +1,86 @@
-#include <vector>
-#include <list>
-#include <map>
-#include <set>
-#include <deque>
-#include <stack>
-#include <bitset>
-#include <algorithm>
-#include <functional>
-#include <numeric>
-#include <utility>
-#include <sstream>
-#include <iostream>
-#include <iomanip>
-#include <cstdio>
-#include <cmath>
-#include <cstdlib>
-#include <cctype>
-#include <string>
-#include <cstring>
-#include <ctime>
-
+#include <bits/stdc++.h>
 using namespace std;
+
+//repetition
+#define FOR(i,a,b) for(int i=(a);i<(b);++i)
+#define rep(i, n) for(int i = 0; i < (int)(n); i++)
+
+//container util
+#define all(x) (x).begin(),(x).end()
+
+//typedef
+typedef long long ll;
+typedef vector<int> VI;
+typedef vector<VI> VVI;
+typedef vector<ll> VLL;
+typedef vector<VLL> VVLL;
+typedef vector<string> VS;
+typedef pair<int, int> PII;
+typedef pair<ll, ll> PLL;
+
+
+//conversion
 inline int toInt(string s) {int v; istringstream sin(s);sin>>v;return v;}
-
-//二次元累積和を用いた解法
-vector<vector<int>> sum;
-int N,M,Q;
-
-void buildSumTable(vector<int>L, vector<int> R){
-  sum = vector<vector<int>>(N+1,vector<int>(N+1,0));
-  for(int i = 0; i < M; i++){
-    sum[L[i]][R[i]] ++;
-  }
-  for(int i = 1; i <= N ; i++){
-    for(int j = 1; j <= N; j++){
-      sum[i][j] += sum[i-1][j];
-      sum[i][j] += sum[i][j-1];
-      sum[i][j] -= sum[i-1][j-1];
-    }
-  }
-}
-
-int getSumLange(int L, int R){
-  return sum[R][R] - sum[R][L-1] - sum[L-1][R] + sum[L-1][L-1];
-}
+template<class T> inline string toString(T x) {ostringstream sout;sout<<x;return sout.str();}
 
 
 int main(){
+  int N,K;
+  cin >> N >> K;
+  vector<PLL> sushi(N);
+  VLL kindsMax;
+  rep(i,N){
+    int t,d;
+    cin >> t >> d;
+    t--; // kinds is 0 origin
+    sushi[i]= make_pair(t,d);
+  }
 
-  cin >> N >> M >> Q;
-  vector<int> L(M);
-  vector<int> R(M);
-  for(int i = 0; i < M; i++){
-    scanf("%d %d",&L[i], &R[i]);
+  sort(all(sushi));
+  map<int,int> kinds;
+  int cnt = -1;
+  rep(i,N){
+    kinds[sushi[i].first]++;
+    if(kinds[sushi[i].first] == 1){
+      cnt++;
+      kindsMax.push_back(sushi[i].second);
+    }else{
+      kindsMax[cnt] = max(kindsMax[cnt],sushi[i].second);
+    }
   }
-  vector<int> p(Q);
-  vector<int> q(Q);
 
-  for(int i = 0; i < Q; i++){
-    scanf("%d %d",&p[i], &q[i]);
+  sort(sushi.rbegin(),sushi.rend());
+  VLL sumSushi;
+  rep(i,N){
+    if(i == 0) continue;
+    if(sushi[i].first != sushi[i-1].first) continue;
+    sumSushi.push_back(sushi[i].second);
   }
-  buildSumTable(L,R);
-  for(int i = 0; i < Q; i++){
-    printf("%d\n",getSumLange(p[i],q[i]));
+
+  sort(sumSushi.rbegin(), sumSushi.rend());
+  sort(kindsMax.rbegin(),kindsMax.rend());
+
+  // sumSuhsi累積和構築
+  rep(i,sumSushi.size()-1){
+    sumSushi[i+1] += sumSushi[i];
   }
+
+  // kindsMax累積和構築
+  rep(i,kindsMax.size()-1){
+    kindsMax[i+1] += kindsMax[i];
+  }
+
+  ll ans = 0;
+  for(ll i = 1 ; i <= K; i++){
+    //cout << ans << endl;
+    if(kindsMax.size() < i) continue;
+    if(sumSushi.size() <= K-i-1) {
+      ans = max(kindsMax[i-1]  + i * i , ans);
+    }else{
+      ans = max(kindsMax[i-1] + sumSushi[K-i-1] + i * i , ans);
+    }
+  }
+
+  cout << ans << endl;
   return 0;
 }

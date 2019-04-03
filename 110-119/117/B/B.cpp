@@ -1,70 +1,43 @@
-#include <vector>
-#include <list>
-#include <map>
-#include <set>
-#include <deque>
-#include <stack>
-#include <bitset>
-#include <algorithm>
-#include <functional>
-#include <numeric>
-#include <utility>
-#include <sstream>
-#include <iostream>
-#include <iomanip>
-#include <cstdio>
-#include <cmath>
-#include <cstdlib>
-#include <cctype>
-#include <string>
-#include <cstring>
-#include <ctime>
-
+#include <bits/stdc++.h>
 using namespace std;
+
+//repetition
+#define FOR(i,a,b) for(int i=(a);i<(b);++i)
+#define rep(i, n) for(int i = 0; i < (int)(n); i++)
+
+//container util
+#define all(x) (x).begin(),(x).end()
+
+//typedef
+typedef long long ll;
+typedef vector<int> VI;
+typedef vector<VI> VVI;
+typedef vector<ll> VLL;
+typedef vector<VLL> VVLL;
+typedef vector<string> VS;
+typedef pair<int, int> PII;
+typedef pair<ll, ll> PLL;
+
+
+//conversion
 inline int toInt(string s) {int v; istringstream sin(s);sin>>v;return v;}
+template<class T> inline string toString(T x) {ostringstream sout;sout<<x;return sout.str();}
+
 
 int main(){
-  int H,W;
-  vector<string> a;
-  cin >> H >> W;
-  char board[H][W];
-  for(int i = 0; i < H; i ++){
-    for(int j = 0 ; j < W; j++){
-      cin >> board[i][j];
-    }
+  int N;
+  cin >> N;
+  int a[N];
+  rep(i,N){
+    cin >> a[i];
   }
-
-  for(int i = 0; i < H; i ++){
-    for(int j = 0 ; j < W; j++){
-      if(board[i][j] == '.') continue;
-      else{
-        string s = "";
-        for(int k = 0; k < W; k++){
-          s = s + board[i][k];
-        }
-        a.push_back(s);
-        break;
-      }
-    }
+  sort(a,a+N);
+  ll sum = 0;
+  rep(i,N-1) sum += a[i];
+  if(sum > a[N-1] ){
+    cout << "Yes" << endl;
+  }else{
+    cout << "No" << endl;
   }
-
-
-  for(int j = 0 ; j < W; j++){
-    for(int i = 0; i < a.size(); i++){
-      if(a[i][j] == '.' && i == a.size()-1){
-        for(int k = 0; k < a.size(); k++) a[k][j] = 'x';
-      }
-      else if(a[i][j] == '.') continue;
-      else break;
-    }
-  }
-  
-  for(int i = 0; i < a.size(); i++){
-    for(int j = 0; j < W; j++){
-      if(a[i][j] != 'x') cout << a[i][j] ;
-    }
-      cout << endl;
-  }
-
   return 0;
 }
