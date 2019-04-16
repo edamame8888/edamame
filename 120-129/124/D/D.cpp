@@ -25,35 +25,67 @@ template<class T> inline string toString(T x) {ostringstream sout;sout<<x;return
 
 
 int main(){
-  int N, cmd;
-  stirng str;
-  cin >> N >> cmd >> str;
+  int n, cmd;
+  string str;
+  cin >> n >> cmd >> str;
 
-  ll left = 0,right = 0;
-  int cmdCnt = 0, cnt = 0;
-  bool flag == false;
+  ll left = 0,right = -1;
+  int cmdCnt = 0;
+  bool flag = false;
   ll maxLength = 0;
 
-  rep(right,n){
-    if(flag){//0が連続している
-      if(str[i] != 0){
+  for(;; right ++){
+    if(right == n-1) break;
+    if(flag){ //0が連続している
+      if(str[right+1] != '0'){
         flag = false;
       }
-      right++;
     }
     else{
-      if(str[i] == 0){
+      if(str[right+1] == '0'){
         if(cmdCnt == cmd) break;
         else{
           cmdCnt++;
           flag = true;
-          right ++;
         }
       }
-      else{right++}
     }
   }
-  cout << right << endl;
+
+  maxLength =  right - left + 1;
+
+  while(true){
+      //左を縮める
+      bool leftFlag = false;
+      while(left <= right){
+          if(leftFlag == false){
+              if(str[left] == '1') left++;
+              else{leftFlag = true; left++;}
+          }else{
+              if(str[left] == '1'){break;}
+              else left++;
+          }
+      }
+      //右を伸ばす
+      bool rightFlag = false;
+      while(right < n){
+          if(right == n-1) break;
+          if(rightFlag == false){
+              if(str[right+1] == '0') right++;
+              else{rightFlag = true; right++;}
+          }else{
+              if(str[right+1] == '0') break;
+              else right++;
+          }
+      }
+      //cout << left << ' ' << right << endl;
+      if(right == n-1){
+          cout << max(maxLength, right - left + 1) << endl;
+          break;
+      }else{
+          maxLength = max(right - left + 1, maxLength);
+      }
+  }
 
   return 0;
 }
