@@ -25,20 +25,18 @@ template<class T> inline string toString(T x) {ostringstream sout;sout<<x;return
 
 
 int main(){
-    VI array(5);
-    ll ans = 0;
-    int minNum = 10;
-    rep(i,5){
-        cin >> array[i];
-        if(array[i] % 10 != 0 ) minNum = min(array[i]%10,minNum);
+  string s;
+  cin >> s;
+  int cnt = 0,ans = 0;
+  rep(i,s.size()){
+    if(s[i] == 'A' || s[i] == 'C' || s[i] == 'G' || s[i] == 'T'){
+      cnt++;
+    }else{
+      ans = max(ans,cnt);
+      cnt = 0;
     }
-
-    rep(i,5){
-        if(array[i] % 10 != 0) ans += array[i]/10 * 10 + 10;
-        else ans += array[i];
-    }
-
-
-    cout << ans - (10-minNum)<< endl;
-    return 0;
+  }
+  ans = max(ans,cnt);
+  cout << ans << endl;
+  return 0;
 }

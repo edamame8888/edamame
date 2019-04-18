@@ -25,15 +25,25 @@ template<class T> inline string toString(T x) {ostringstream sout;sout<<x;return
 
 
 int main(){
-    ll n;
-    cin >> n;
-    ll minNum = 10000000000000000;
-    VLL array(5);
-    rep(i,5){
-        cin >> array[i];
-        minNum = min(minNum,array[i]);
+  int n,q;
+  cin >> n >> q;
+  string s;
+  cin >> s;
+  VI ACcnt(n,0);
+  rep(i,s.size()-1){
+    if(s[i] == 'A' && s[i+1] == 'C'){
+      ACcnt[i+1] = 1;
     }
-    cout << 4 + (ll)ceil(n/(double)minNum) << endl;
-
-    return 0;
+  }
+  rep(i,n-1){
+    ACcnt[i+1] += ACcnt[i];
+  }
+  rep(i,q){
+    int l,r;
+    cin >> l >> r;
+    l--,r--;
+    if(l != 0) cout << ACcnt[r] - ACcnt[l] << endl;
+    else cout << ACcnt[r] << endl;
+  }
+  return 0;
 }
