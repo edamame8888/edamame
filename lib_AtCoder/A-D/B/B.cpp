@@ -18,10 +18,6 @@ typedef vector<string> VS;
 typedef pair<int, int> PII;
 typedef pair<ll, ll> PLL;
 
-//const value
-//const ll MOD = 1e9 + 7;
-//const int dx[] = {0,1,0,-1};//{0,0,1,1,1,-1,-1,-1};
-//const int dy[] = {1,0,-1,0};//{1,-1,0,1,-1,0,1,-1};
 
 //conversion
 inline int toInt(string s) {int v; istringstream sin(s);sin>>v;return v;}
@@ -30,8 +26,7 @@ template<class T> inline string toString(T x) {ostringstream sout;sout<<x;return
 
 
 int main(){
-  ios::sync_with_stdio(false);
-  cin.tie(0);
-
-  return 0;
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    return 0;
 }
